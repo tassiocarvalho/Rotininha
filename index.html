@@ -1,0 +1,422 @@
+<html>
+    <head>
+        <base href="">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Minha Rotina TEA</title>
+        <style>
+            :root {
+                --cor-acordar  : #FFD0D7;
+                --cor-desjejum : #C5FFC5;
+                --cor-manha1   : #FFD0D7;
+                --cor-intervalo: #C5FFC5;
+                --cor-manha2   : #BBE8FA;
+                --cor-almoco   : #C5FFC5;
+                --cor-tarde1   : #FFD0D7;
+                --cor-lanche2  : #C5FFC5;
+                --cor-tarde2   : #BBE8FA;
+                --cor-noite1   : #FFD0D7;
+                --cor-jantar   : #C5FFC5;
+                --cor-noite2   : #BBE8FA;
+            }
+            
+            body {
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #f0f8ff;
+            }
+            
+            .modo-selecao {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                margin-bottom: 30px;
+            }
+            
+            .btn-modo {
+                padding: 15px 30px;
+                font-size: 18px;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: transform 0.2s;
+            }
+            
+            #btn-leitor {
+                background-color: #4CAF50;
+                color: white;
+            }
+            
+            #btn-editor {
+                background-color: #2196F3;
+                color: white;
+            }
+            
+            .btn-modo:hover {
+                transform: scale(1.05);
+            }
+            
+            .modo-editor {
+                display: none;
+            }
+            
+            .form-editor {
+                background-color: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .form-grupo {
+                margin-bottom: 15px;
+            }
+            
+            .form-grupo label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+            
+            .form-grupo input[type="text"],
+            .form-grupo select {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+            
+            .cards-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+                padding: 20px;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            @media (min-width: 768px) {
+                .cards-container {
+                    grid-template-columns: repeat(2, 1fr);
+                    max-width: 500px;
+                }
+            }
+            
+            .categoria-container {
+                margin-bottom: 30px;
+                text-align: center;
+            }
+            
+            .categoria-titulo {
+                font-size: 24px;
+                margin-bottom: 15px;
+                color: #333;
+            }
+            
+            .card {
+                background-color: white;
+                border-radius: 10px;
+                padding: 15px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                text-align: center;
+            }
+            
+            .card img {
+                width: 150px;
+                height: 150px;
+                object-fit: cover;
+                border-radius: 10px;
+                margin-bottom: 10px;
+            }
+            
+            .card-titulo {
+                font-size: 18px;
+                margin: 10px 0;
+            }
+            
+            .check-container {
+                margin-top: 10px;
+            }
+            
+            .check-btn {
+                /*background-color: #4CAF50;*/
+                background-color: #919191;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            
+            .check-btn.checked {
+                background-color: #45a049;
+            }
+            
+            .toggle-switch {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 34px;
+            }
+            
+            .toggle-switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                transition: .4s;
+                border-radius: 34px;
+            }
+            
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                transition: .4s;
+                border-radius: 50%;
+            }
+            
+            input:checked + .slider {
+                background-color: #2196F3;
+            }
+            
+            input:checked + .slider:before {
+                transform: translateX(26px);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="modo-selecao">
+            <label><h1>Rotininha v1.2<h1></label>
+        </div>
+            
+        <div class="modo-selecao">
+            <button id="btn-leitor" class="btn-modo">Modo Leitor</button>
+            <button id="btn-editor" class="btn-modo">Modo Editor</button>
+        </div>
+            
+        <div id="modo-leitor" class="modo-leitor">
+            <!-- Cards serão inseridos aqui dinamicamente -->
+        </div>
+            
+        <div id="modo-editor" class="modo-editor">
+            <form class="form-editor" id="form-card">
+                <div class="form-grupo">
+                    <label for="categoria">Categoria:</label>
+                    <select id="categoria" required>
+                        <option value="acordar">Após acordar</option>
+                        <option value="desjejum">Desjejum</option>
+                        <option value="manha_1">Início da manhã</option>
+                        <option value="intervalo_manha">Intervalo da manhã</option>
+                        <option value="manha_2">Fim da manhã</option>
+                        <option value="almoco">Almoço</option>
+                        <option value="tarde_1">Início de tarde</option>
+                        <option value="Intervalor_tarde">Intervalor da tarde</option>
+                        <option value="tarde_2">Fim da tarde</option>
+                        <option value="noite_1">Início da noite</option>
+                        <option value="jantar">Jantar</option>
+                        <option value="noite_2">Fim da noite</option>
+                    </select>
+                </div>
+                <div class="form-grupo">
+                    <label for="titulo">Título da Atividade:</label>
+                    <input type="text" id="titulo" required>
+                </div>
+                <div class="form-grupo">
+                    <label for="imagem">Escolha uma Imagem:</label>
+                    <input type="file" id="imagem" accept="image/*" required>
+                </div>                               
+                <div class="form-grupo">
+                    <table><tr>
+                        <td style="width: 70%;">
+                            <label>Ativo:</label>
+                            <label class="toggle-switch">
+                            <input type="checkbox" id="ativo" checked>
+                            <span class="slider"></span>
+                            </label>
+                        </td><td style="width: 30%;">
+                            <button type="submit" class="btn-modo" style="width: 140px;">Criar Card</button>
+                    </td></tr></table>
+                </div>
+            </form>
+                
+            <div class="cards-container" id="editor-cards">
+                <!-- Cards editáveis serão inseridos aqui -->
+            </div>
+        </div>
+        
+        <script>
+            let cards = JSON.parse(localStorage.getItem('cards') || '[]');
+            
+            document.getElementById('btn-leitor').addEventListener('click', () => mostrarModo('leitor'));
+            document.getElementById('btn-editor').addEventListener('click', () => mostrarModo('editor'));
+            document.getElementById('form-card').addEventListener('submit', criarCard);
+            
+            function mostrarModo(modo) {
+                document.getElementById('modo-leitor').style.display = modo === 'leitor' ? 'block' : 'none';
+                document.getElementById('modo-editor').style.display = modo === 'editor' ? 'block' : 'none';
+                
+                if (modo === 'leitor') {
+                    renderizarCardsLeitor();
+                } else {
+                    renderizarCardsEditor();
+                }
+            }
+            
+            function criarCard(e) {
+            e.preventDefault();
+            
+            const fileInput = document.getElementById('imagem');
+            const file = fileInput.files[0];
+            
+            if (!file) return; // Verifica se há uma imagem selecionada
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const novoCard = {
+                    id: Date.now(),
+                    titulo: document.getElementById('titulo').value,
+                    imagem: event.target.result, // Salva a imagem como base64
+                    categoria: document.getElementById('categoria').value,
+                    ativo: document.getElementById('ativo').checked,
+                    completo: false
+                };
+
+                cards.push(novoCard);
+                salvarCards();
+                renderizarCardsEditor();
+                e.target.reset();
+            };
+            
+            reader.readAsDataURL(file); // Converte a imagem em base64 para exibição imediata
+        }
+
+            
+            function toggleAtivo(id) {
+                const card = cards.find(c => c.id === id);
+                if (card) {
+                    card.ativo = !card.ativo;
+                    salvarCards();
+                    renderizarCardsEditor();
+                }
+            }
+            
+            function toggleCompleto(id) {
+                const card = cards.find(c => c.id === id);
+                if (card) {
+                    card.completo = !card.completo;
+                    salvarCards();
+                    renderizarCardsLeitor();
+                }
+            }
+            
+            function excluirCard(id) {
+                cards = cards.filter(c => c.id !== id);
+                salvarCards();
+                renderizarCardsEditor();
+            }
+            
+            function renderizarCardsLeitor() {
+                const container = document.getElementById('modo-leitor');
+                container.innerHTML = '';
+                
+                const categorias = [
+                    'acordar',
+                    'desjejum',
+                    'manha_1',
+                    'intervalo_manha',
+                    'manha_2',
+                    'almoco',
+                    'tarde_1',
+                    'intervalor_tarde',
+                    'tarde_2',
+                    'noite_1',
+                    'jantar',
+                    'noite_2'
+                ];
+                
+                categorias.forEach(categoria => {
+                    const cardsCategoria = cards.filter(c => c.ativo && c.categoria === categoria);
+                    
+                    if (cardsCategoria.length > 0) {
+                        const categoriaContainer = document.createElement('div');
+                        categoriaContainer.className = 'categoria-container';
+                        
+                        const titulo = document.createElement('h2');
+                        titulo.className = 'categoria-titulo';
+                        titulo.textContent = categoria.charAt(0).toUpperCase() + categoria.slice(1);
+                        categoriaContainer.appendChild(titulo);
+                        
+                        const cardsDiv = document.createElement('div');
+                        cardsDiv.className = 'cards-container';
+                        
+                        cardsCategoria.forEach(card => {
+                            cardsDiv.innerHTML += `
+                            <div class="card" style="background-color: var(--cor-${categoria})">
+                                <img src="${card.imagem}" alt="${card.titulo}" width="150" height="150">
+                                <h3 class="card-titulo">${card.titulo}</h3>
+                                <div class="check-container">
+                                    <button class="check-btn ${card.completo ? 'checked' : ''}" onclick="toggleCompleto(${card.id})">
+                                        ${card.completo ? '✓ Concluído :)' : 'Marcar como concluído :('}
+                                    </button>
+                                </div>
+                            </div>
+                            `;
+                        });
+                    
+                    categoriaContainer.appendChild(cardsDiv);
+                    container.appendChild(categoriaContainer);
+                    }
+                });
+            }
+                    
+            function renderizarCardsEditor() {
+                const container = document.getElementById('editor-cards');
+                container.innerHTML = '';
+                
+                cards.forEach(card => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'card';
+                    cardElement.style.backgroundColor = `var(--cor-${card.categoria})`;
+                    cardElement.innerHTML = `
+                    <img src="${card.imagem}" alt="${card.titulo}" width="150" height="150">
+                    <h3 class="card-titulo">${card.titulo}</h3>
+                    <p>Categoria: ${card.categoria}</p>
+                    <label class="toggle-switch">
+                        <input type="checkbox" ${card.ativo ? 'checked' : ''} 
+                        onchange="toggleAtivo(${card.id})">
+                        <span class="slider"></span>
+                    </label>
+                    <button onclick="excluirCard(${card.id})" 
+                    style="background-color: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 5px; margin-top: 10px;">
+                        Excluir
+                    </button>
+                    `;
+                    container.appendChild(cardElement);
+                });
+            }
+            
+            function salvarCards() {
+                localStorage.setItem('cards', JSON.stringify(cards));
+            }
+            
+            // Inicializar com o modo leitor
+            mostrarModo('leitor');
+        </script>
+    </body>
+</html>
