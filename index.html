@@ -1,26 +1,19 @@
-<link rel="manifest" href="manifest.json">
-
 <html>
     <head>
         <base href="">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Minha Rotina TEA</title>
-        <link rel="icon" href="icon.png" type="image/png">
+        <title>Rotininha</title>
         <style>
             :root {
-                --cor-acordar  : #FFD0D7;
-                --cor-desjejum : #C5FFC5;
-                --cor-manha1   : #FFD0D7;
-                --cor-intervalo: #C5FFC5;
-                --cor-manha2   : #BBE8FA;
-                --cor-almoco   : #C5FFC5;
-                --cor-tarde1   : #FFD0D7;
-                --cor-lanche2  : #C5FFC5;
-                --cor-tarde2   : #BBE8FA;
-                --cor-noite1   : #FFD0D7;
-                --cor-jantar   : #C5FFC5;
-                --cor-noite2   : #BBE8FA;
+                
+               --cor-acordar  : #FFD0D7;
+               --cor-manha    : #C5FFC5;
+               --cor-almoco   : #BBE8FA;
+               --cor-tarde    : #FFD5B6;
+               --cor-jantar   : #B6F8FF;
+               --cor-noite    : #DEB6FF;
+               --cor-dormir   : #FFCBB6;
             }
             
             body {
@@ -28,6 +21,118 @@
                 margin: 0;
                 padding: 20px;
                 background-color: #f0f8ff;
+            }
+            
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+h2 {
+    text-align: center;
+}
+
+/* Tela de Usuários */
+.usuarios-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.usuario-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.usuario-card:hover {
+    transform: scale(1.05);
+}
+
+.usuario-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.usuario-logo {
+/*    background: white;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);*/
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.usuario-logo img {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 6px;
+}
+
+.btn-novo-usuario {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Modo Switcher */
+.modo-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.modo-switcher button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.modo-switcher .ativo {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.modo-switcher .inativo {
+    background-color: #ddd;
+    color: #666;
+}
+    
+            #titulo_app {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                margin-bottom: 30px;
             }
             
             .modo-selecao {
@@ -38,6 +143,8 @@
             }
             
             .btn-modo {
+                background-color: #4CAF50;
+                color: white;
                 padding: 15px 30px;
                 font-size: 18px;
                 border: none;
@@ -64,6 +171,40 @@
                 display: none;
             }
             
+.btn-grupo {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-cancelar,
+.btn-salvar {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-cancelar {
+    background-color: #ff4444;
+    color: white;
+}
+
+.btn-salvar {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.form-usuario {
+    display: none;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
             .form-editor {
                 background-color: white;
                 padding: 20px;
@@ -81,6 +222,7 @@
                 display: block;
                 margin-bottom: 5px;
                 font-weight: bold;
+                color: #333;
             }
             
             .form-grupo input[type="text"],
@@ -99,6 +241,16 @@
                 max-width: 500px;
                 margin: 0 auto;
             }
+
+/* Cards Container */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
             @media (min-width: 768px) {
                 .cards-container {
@@ -129,6 +281,8 @@
             .card img {
                 width: 150px;
                 height: 150px;
+width: 200px;
+height: 200px;
                 object-fit: cover;
                 border-radius: 10px;
                 margin-bottom: 10px;
@@ -139,6 +293,19 @@
                 margin: 10px 0;
             }
             
+.card-checkbox {
+    width: 30px;
+    height: 30px;
+    margin: 10px auto;
+    cursor: pointer;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
             .check-container {
                 margin-top: 10px;
             }
@@ -170,6 +337,15 @@
                 height: 0;
             }
             
+.btn-toggle {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+}
+
             .slider {
                 position: absolute;
                 cursor: pointer;
@@ -201,39 +377,99 @@
             input:checked + .slider:before {
                 transform: translateX(26px);
             }
+            
+.disabled {
+    background-color: #ff4444;
+}
+
+.card.acordar { background-color: var(--categoria-acordar); }
+.card.manha   { background-color: var(--categoria-manha)  ; }
+.card.almoco  { background-color: var(--categoria-almoco) ; }
+.card.tarde   { background-color: var(--categoria-tarde)  ; }
+.card.jantar  { background-color: var(--categoria-jantar) ; }
+.card.noite   { background-color: var(--categoria-noite)  ; }
+.card.dormir  { background-color: var(--categoria-dormir) ; }
+
         </style>
     </head>
     <body>
-        <div class="modo-selecao">
-            <label><h1>Rotininha v1.2<h1></label>
+        <!-- Titulo do App -->
+        <div id="titulo_app">
+            <label><h1>Rotininha v1.5<h1></label>
+            <audio id="audio_inicio" src="misty_morning.mp3"></audio>
+        </div>
+        
+        <!-- tela usuarios cadastrados -->
+        <div id="telaUsuarios">
+            <div class="usuarios-container">
+                <!-- Usuários serão inseridos aqui dinamicamente -->
+            </div>
+            <button class="btn-novo-usuario" onclick="mostrarFormUsuario()">Novo Usuário</button>
+        </div>
+        
+        <!-- formulario cadastro novo usuario -->
+        <div id="formNovoUsuario" class="form-usuario">
+            <h2>Novo Usuário</h2>
+            <form id="formUsuario" onsubmit="salvarUsuario(event)">
+                <div class="form-grupo">
+                    <label for="nomeUsuario">Nome:</label>
+                    <input type="text" id="nomeUsuario" required>
+                </div>
+                <div class="form-grupo">
+                <!--label for="fotoUsuario">Foto:</label>
+                    <input type="file" id="fotoUsuario" accept="image/*" capture="user" required -->
+                    <input type="hidden" id="imagemUsuario" required>
+                    <label for="imageUploadUsuario">Foto:</label>
+                    <input type="file" id="imageUploadUsuario" 
+                        title="Foto do Usuário" 
+                        accept="image/*" 
+                        /*capture="environment"*/ 
+                        required>
+                    <br>
+                    <img id="previewUsuario" src="" alt="Pré-visualização da Foto" style="display:none; width: 200px;">
+                    
+                </div>
+                <div class="btn-grupo">
+                    <button type="button" class="btn-cancelar" onclick="cancelarNovoUsuario()">Cancelar</button>
+                    <button type="submit" class="btn-salvar">Salvar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- tela modo leitor -->
+        <div id="telaRotina" style="display: none;">
+                
+            <div class="modo-selecao">
+                <div class="usuario-logo">
+                        <img src="data:image/jpeg;base64,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" alt="Foto de DD">
+                <!--h3>DD</h3-->
+                </div>
+                <button id="btn-leitor" onclick="setModo('leitor')" class="btn-modo" class="ativo"   style="display: none;">Modo Leitor</button>
+                <button id="btn-editor" onclick="setModo('editor')" class="btn-modo" class="inativo" style="display: block;">Modo Editor</button>
+            </div>
+                
+            <div id="modo-leitor" class="modo-leitor">
+                <!-- Cards serão inseridos aqui dinamicamente -->
+            </div>
+            <div id="cardsContainer" class="cards-container">
+                <!-- Cards serão inseridos aqui dinamicamente -->
+                </div>
         </div>
             
-        <div class="modo-selecao">
-            <button id="btn-leitor" class="btn-modo">Modo Leitor</button>
-            <button id="btn-editor" class="btn-modo">Modo Editor</button>
-        </div>
-            
-        <div id="modo-leitor" class="modo-leitor">
-            <!-- Cards serão inseridos aqui dinamicamente -->
-        </div>
-            
+        <!-- tela modo editor -->
         <div id="modo-editor" class="modo-editor">
             <form class="form-editor" id="form-card">
                 <div class="form-grupo">
                     <label for="categoria">Categoria:</label>
                     <select id="categoria" required>
-                        <option value="acordar">Após acordar</option>
-                        <option value="desjejum">Desjejum</option>
-                        <option value="manha_1">Início da manhã</option>
-                        <option value="intervalo_manha">Intervalo da manhã</option>
-                        <option value="manha_2">Fim da manhã</option>
+                        <option value="">-- Selecione a categoria --</option>
+                        <option value="acordar">Acordar</option>
+                        <option value="manha">Manhã</option>
                         <option value="almoco">Almoço</option>
-                        <option value="tarde_1">Início de tarde</option>
-                        <option value="Intervalor_tarde">Intervalor da tarde</option>
-                        <option value="tarde_2">Fim da tarde</option>
-                        <option value="noite_1">Início da noite</option>
+                        <option value="tarde">Tarde</option>
                         <option value="jantar">Jantar</option>
-                        <option value="noite_2">Fim da noite</option>
+                        <option value="noite">Noite</option>
+                        <option value="dormir">Dormir</option>
                     </select>
                 </div>
                 <div class="form-grupo">
@@ -241,9 +477,19 @@
                     <input type="text" id="titulo" required>
                 </div>
                 <div class="form-grupo">
-                    <label for="imagem">Escolha uma Imagem:</label>
-                    <input type="file" id="imagem" accept="image/*" required>
-                </div>                               
+                    <table><tbody><tr><td style="width: 66%;">
+                        <!--label for="imagem">URL da Imagem:</label-->
+                        <input type="hidden" id="imagem_card" required>
+                        <label for="imageUpload">Carregar Imagem:</label>
+                        <input type="file" id="imageUpload" 
+                            title="Imagem da Rotina" 
+                            accept="image/*" 
+                            /*capture="environment"*/ 
+                            required>
+                    </td><td>
+                        <img id="preview_card" src="" alt="Preview" style="display: none; height: 100px;">
+                    </td></tr></tbody></table>
+                </div>
                 <div class="form-grupo">
                     <table><tr>
                         <td style="width: 70%;">
@@ -253,22 +499,80 @@
                             <span class="slider"></span>
                             </label>
                         </td><td style="width: 30%;">
-                            <button type="submit" class="btn-modo" style="width: 140px;">Criar Card</button>
+                            <button type="submit" class="btn-modo" class="inativo" style="width: 140px;">Criar Card</button>
                     </td></tr></table>
                 </div>
             </form>
                 
+            <!-- cards criados no modo editor -->
             <div class="cards-container" id="editor-cards">
                 <!-- Cards editáveis serão inseridos aqui -->
             </div>
         </div>
         
         <script>
+            // Sons
+            const somInicio = new Audio('misty_morning.mp3');
+            const somSucesso = new Audio('happykids.mp3');
+            const somTriste = new Audio('ooh.mp3');
+
+            let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            let usuarioAtual = null;
+            let modoAtual = 'leitor';
             let cards = JSON.parse(localStorage.getItem('cards') || '[]');
             
             document.getElementById('btn-leitor').addEventListener('click', () => mostrarModo('leitor'));
             document.getElementById('btn-editor').addEventListener('click', () => mostrarModo('editor'));
             document.getElementById('form-card').addEventListener('submit', criarCard);
+            document.getElementById("imageUpload").addEventListener("change", function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const preview_card = document.getElementById("preview_card");
+                        preview_card.src = e.target.result;
+                        preview_card.style.display = "block";
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            document.getElementById("imageUploadUsuario").addEventListener("change", function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const previewUsuario = document.getElementById("previewUsuario");
+                        previewUsuario.src = e.target.result;
+                        previewUsuario.style.display = "block";
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            document.getElementById("imageUploadUsuario").addEventListener("change", function(event) {
+                const imagemUsuario = event.target.files[0];
+                
+                if (imagemUsuario) {
+                    // Exibir o nome do arquivo no campo de texto
+                    document.getElementById("imagemUsuario").value = imagemUsuario.name;
+                    
+                    // Opcional: criar uma URL temporária para exibir a imagem, se necessário
+                    const imageUrlUsuario = URL.createObjectURL(imagemUsuario);
+                    console.log("URL temporária da imagemUsuario:", imageUrlUsuario);
+                }
+            });
+            
+            document.getElementById("imageUpload").addEventListener("change", function(event) {
+                const imagem_card = event.target.files[0];
+                
+                if (imagem_card) {
+                    // Exibir o nome do arquivo no campo de texto
+                    document.getElementById("image").value = imagem_card.name;
+                    
+                    // Opcional: criar uma URL temporária para exibir a imagem, se necessário
+                    const imageUrl = URL.createObjectURL(imagem_card);
+                    console.log("URL temporária da imagem_card:", imageUrl);
+                }
+            });
             
             function mostrarModo(modo) {
                 document.getElementById('modo-leitor').style.display = modo === 'leitor' ? 'block' : 'none';
@@ -282,33 +586,24 @@
             }
             
             function criarCard(e) {
-            e.preventDefault();
-            
-            const fileInput = document.getElementById('imagem');
-            const file = fileInput.files[0];
-            
-            if (!file) return; // Verifica se há uma imagem selecionada
-
-            const reader = new FileReader();
-            reader.onload = function(event) {
+                e.preventDefault();
                 const novoCard = {
                     id: Date.now(),
                     titulo: document.getElementById('titulo').value,
-                    imagem: event.target.result, // Salva a imagem como base64
+                    /*imagem_card: document.getElementById('imagem_card').value,*/
+                    imagem_card: document.getElementById('preview_card').src,
                     categoria: document.getElementById('categoria').value,
                     ativo: document.getElementById('ativo').checked,
                     completo: false
                 };
-
+                
                 cards.push(novoCard);
                 salvarCards();
                 renderizarCardsEditor();
                 e.target.reset();
-            };
-            
-            reader.readAsDataURL(file); // Converte a imagem em base64 para exibição imediata
-        }
-
+                document.getElementById('preview_card').src = '';
+                document.getElementById("preview_card").style.display = "none";
+            }
             
             function toggleAtivo(id) {
                 const card = cards.find(c => c.id === id);
@@ -320,6 +615,7 @@
             }
             
             function toggleCompleto(id) {
+                somSucesso.play();
                 const card = cards.find(c => c.id === id);
                 if (card) {
                     card.completo = !card.completo;
@@ -340,17 +636,12 @@
                 
                 const categorias = [
                     'acordar',
-                    'desjejum',
-                    'manha_1',
-                    'intervalo_manha',
-                    'manha_2',
+                    'manha',
                     'almoco',
-                    'tarde_1',
-                    'intervalor_tarde',
-                    'tarde_2',
-                    'noite_1',
+                    'tarde',
                     'jantar',
-                    'noite_2'
+                    'noite',
+                    'dormir'
                 ];
                 
                 categorias.forEach(categoria => {
@@ -371,7 +662,7 @@
                         cardsCategoria.forEach(card => {
                             cardsDiv.innerHTML += `
                             <div class="card" style="background-color: var(--cor-${categoria})">
-                                <img src="${card.imagem}" alt="${card.titulo}" width="150" height="150">
+                                <img src="${card.imagem_card}" alt="${card.titulo}" width="150" height="150">
                                 <h3 class="card-titulo">${card.titulo}</h3>
                                 <div class="check-container">
                                     <button class="check-btn ${card.completo ? 'checked' : ''}" onclick="toggleCompleto(${card.id})">
@@ -387,7 +678,7 @@
                     }
                 });
             }
-                    
+            
             function renderizarCardsEditor() {
                 const container = document.getElementById('editor-cards');
                 container.innerHTML = '';
@@ -397,7 +688,7 @@
                     cardElement.className = 'card';
                     cardElement.style.backgroundColor = `var(--cor-${card.categoria})`;
                     cardElement.innerHTML = `
-                    <img src="${card.imagem}" alt="${card.titulo}" width="150" height="150">
+                    <img src="${card.imagem_card}" alt="${card.titulo}" width="150" height="150">
                     <h3 class="card-titulo">${card.titulo}</h3>
                     <p>Categoria: ${card.categoria}</p>
                     <label class="toggle-switch">
@@ -418,8 +709,203 @@
                 localStorage.setItem('cards', JSON.stringify(cards));
             }
             
+            function renderizarUsuarios() {
+                // Tocar o som de inicio
+                somInicio.play().catch(error => console.log("Erro ao reproduzir som:", error));
+
+                const container = document.querySelector('.usuarios-container');
+                container.innerHTML = '';
+                
+                const usuariosLimitados = usuarios.slice(0, 6);
+
+                var i=0;
+                usuariosLimitados.forEach( (usuario, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'usuario-card';
+                    card.id = `${index}`;
+                    card.innerHTML = `
+                        <img src="${usuario.foto}" alt="Foto de ${usuario.nome}">
+                        <h3>${usuario.nome}</h3>
+                        <!--span class="excluir-card" onclick="excluirUsuario('${index}')"><h4>${index}</h4></span-->
+                    `;
+                    card.onclick = () => selecionarUsuario(`${index}`);
+                    container.appendChild(card);
+                });
+            }
+            
+            function setModo(modo) {
+                /*modoAtual = modo;
+                /*const [btnLeitor, btnEditor] = document.querySelector('.modo-switcher').children;*/
+                
+                if (modo === 'leitor') {
+                    /*btnLeitor.className = 'ativo';*/
+                    /*btnEditor.className = 'inativo';*/
+/*                    document.getElementById('btn-leitor').className = 'ativo';
+                    document.getElementById('btn-editor').className = 'inativo';*/
+                    document.getElementById('btn-leitor').style.display = 'none';
+                    document.getElementById('btn-editor').style.display = 'block';
+                } else if (modo === 'editor') {
+                    /*btnLeitor.className = 'inativo';*/
+                    /*btnEditor.className = 'ativo';*/
+/*                    document.getElementById('btn-leitor').className = 'inativo';
+                    document.getElementById('btn-editor').className = 'ativo';*/
+                    document.getElementById('btn-leitor').style.display = 'block';
+                    document.getElementById('btn-editor').style.display = 'none';
+                } else {
+                    /*btnLeitor.className = 'ativo';*/
+                    /*btnEditor.className = 'ativo';*/
+/*                    document.getElementById('btn-leitor').className = 'ativo';
+                    document.getElementById('btn-editor').className = 'ativo';*/
+                    document.getElementById('btn-leitor').style.display = 'block';
+                    document.getElementById('btn-editor').style.display = 'block';
+                }
+                renderizarCards();
+                
+            }
+            
+            function toggleCardCompleted(id) {
+                const card = cards.find(c => c.id === id);
+                if (card) {
+                    card.completed = !card.completed;
+                    localStorage.setItem('cards', JSON.stringify(cards));
+                    if (card.completed) {
+                        somSucesso.play();
+                    } else {
+                        somTriste.play();
+                    }
+                    renderizarCards();
+                }
+            }
+            
+            function mostrarFormUsuario() {
+                document.getElementById('formNovoUsuario').style.display = 'block';
+                document.getElementById('telaUsuarios').style.display = 'none';
+                document.getElementById('nomeUsuario').value = '';
+                document.getElementById('imagemUsuario').value = '';
+                document.getElementById('imageUploadUsuario').value = '';
+                document.getElementById('previewUsuario').src = '';
+                document.getElementById('previewUsuario').style.display = 'none';
+            }
+            
+            function cancelarNovoUsuario() {
+                document.getElementById('formNovoUsuario').style.display = 'none';
+                document.getElementById('telaUsuarios').style.display = 'grid';
+            }
+            
+            function salvarUsuario(event) {
+                event.preventDefault();
+                const nome = document.getElementById('nomeUsuario').value;
+                /*const fotoInput = document.getElementById('imagemUsuario');*/
+                const fotoInput = document.getElementById('imageUploadUsuario');
+                const file = fotoInput.files[0];
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const novoUsuario = {
+                        id: Date.now(),
+                        nome: nome,
+                        foto: e.target.result
+                        };
+                    
+                    usuarios.push(novoUsuario);
+                    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+                    
+                    document.getElementById('formNovoUsuario').style.display = 'none';
+                    document.getElementById('telaUsuarios').style.display = 'grid';
+                    document.getElementById('formUsuario').reset();
+                    
+                    renderizarUsuarios();
+                };
+                
+                reader.readAsDataURL(file);
+            }
+            
+            function excluirUsuario(id) {
+                alert(id);
+                console.log("Índice:", index, "Renderizando usuário:", usuario); // Verificar o ID recebido
+                // Garantir que o id seja tratado como número
+                usuarios = usuarios.filter(usuario => usuario.id !== Number(id));
+                localStorage.setItem('usuarios', JSON.stringify(usuarios));
+                console.log("Lista após exclusão:", usuarios); // Confirmar a lista final
+                renderizarUsuarios();
+            }
+        
+            function selecionarUsuario(usuario) {
+                somInicio.pause();
+
+                usuarioAtual = usuario;
+                document.getElementById('telaUsuarios').style.display = 'none';
+                document.getElementById('telaRotina').style.display = 'block';
+                renderizarCards();
+            }
+            
+            function renderizarCards() {
+                const container = document.getElementById('cardsContainer');
+                container.innerHTML = '';
+                
+                const cardsUsuario = cards.filter(card => card.usuarioId === usuarioAtual.id);
+                
+                if (modoAtual === 'leitor') {
+                    const cardsHabilitados = cardsUsuario.filter(card => card.habilitado);
+                    const categorias = ['higiene', 'escola', 'alimentacao', 'lazer'];
+                    
+                    categorias.forEach(categoria => {
+                        const cardsCategoria = cardsHabilitados.filter(card => card.categoria === categoria);
+                        cardsCategoria.forEach(card => {
+                            container.appendChild(criarCardLeitor(card));
+                        });
+                    });
+                } else {
+                    cardsUsuario.forEach(card => {
+                        container.appendChild(criarCardEditor(card));
+                    });
+                }
+            }
+            
+            function criarCardLeitor(card) {
+                const div = document.createElement('div');
+                div.className = `card ${card.categoria}`;
+                div.innerHTML = `
+                    <img src="${card.imagem_card}" alt="${card.texto}">
+                    <h3>${card.texto}</h3>
+                    <input type="checkbox" class="card-checkbox" 
+                        ${card.completed ? 'checked' : ''} 
+                        onclick="toggleCardCompleted('${card.id}')">
+                `;
+                return div;
+            }
+            
+            function criarCardEditor(card) {
+                const div = document.createElement('div');
+                div.className = `card ${card.categoria}`;
+                div.innerHTML = `
+                    <img src="${card.imagem_card}" alt="${card.texto}">
+                    <h3>${card.texto}</h3>
+                    <div class="card-actions">
+                        <button class="btn-toggle ${card.habilitado ? '' : 'disabled'}"
+                            onclick="toggleCardHabilitado('${card.id}')">
+                            ${card.habilitado ? 'Habilitado' : 'Desabilitado'}
+                        </button>
+                    </div>
+                `;
+                return div;
+            }
+            
+            function toggleCardHabilitado(id) {
+                const card = cards.find(c => c.id === id);
+                if (card) {
+                    card.habilitado = !card.habilitado;
+                    localStorage.setItem('cards', JSON.stringify(cards));
+                    renderizarCards();
+                }
+            }
+            
             // Inicializar com o modo leitor
-            mostrarModo('leitor');
+            //mostrarModo('leitor');
+            
+            // Initialize com o modo usuário
+            renderizarUsuarios();
+
         </script>
     </body>
 </html>
