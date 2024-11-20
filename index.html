@@ -1,11 +1,9 @@
 <html>
-    <link rel="manifest" href= "%PUBLIC_URL%/manifest.json" />
     <head>
         <base href="">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Rotininha</title>
-        <link rel="manifest" href= "%PUBLIC_URL%/manifest.json" />
         <style>
             :root {
                 
@@ -397,7 +395,7 @@ height: 200px;
     <body>
         <!-- Titulo do App -->
         <div id="titulo_app">
-            <label><h1>Rotininha v1.666<h1></label>
+            <label><h1>Rotininha v1.5<h1></label>
             <link rel="icon" href="icon.png" type="image/png">
             <audio id="audio_inicio" src="misty_morning.mp3"></audio>
         </div>
@@ -409,11 +407,6 @@ height: 200px;
             </div>
             <button class="btn-novo-usuario" onclick="mostrarFormUsuario()">Novo Usuário</button>
         </div>
-        <script>
-            if (typeof navigator.serviceWorker !== 'undefined') {
-                navigator.serviceWorker.register('pwabuilder-sw.js');
-            }
-        </script>
         <!-- formulario cadastro novo usuario -->
         <div id="formNovoUsuario" class="form-usuario">
             <h2>Novo Usuário</h2>
