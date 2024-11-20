@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Rotininha</title>
+        <link rel="manisfest" href= "%PUBLIC_URL%/manifest.json" />
         <style>
             :root {
                 
@@ -436,7 +437,12 @@ height: 200px;
                 </div>
             </form>
         </div>
-
+        <script>
+            if (typeof navigator.serviceWorker !== 'undefined') {
+                navigator.serviceWorker.register('pwabuilder-sw.js');
+            }
+        </script>
+            
         <!-- tela modo leitor -->
         <div id="telaRotina" style="display: none;">
                 
